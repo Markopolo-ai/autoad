@@ -10,7 +10,6 @@ from facebook_business.adobjects.adset import AdSet
 from facebook_business.api import FacebookAdsApi
 import requests
 from datetime import datetime
-from dateutil.relativedelta import relativedelta 
 import requests
 # ---------------------------------------------------------
 '''
@@ -270,95 +269,3 @@ def create_facebook_ad( access_token,
     
     print("LOG:Ad Created:",ad_id['id'])
     
-
-
-
-
-
-
-
-# ---------------------------------------------------------
-#---Extra Functions for a/b testing and so-on 
-# ---------------------------------------------------------
-
-'''
-    Standard
-
-UI_OBJECTIVES =["Sales"         ,"Reach"        ,"Lead Generation"  ,"Video Promotion"  ,"App Install"  ,"Store Visit"]
-FB_OBJECTIVES =['MESSAGES'      ,'REACH'        ,'LEAD_GENERATION'  ,'VIDEO_VIEWS'      ,'APP_INSTALLS' ,'STORE_VISITS']
-GOALS         =['REPLIES'       ,'REACH'        ,'LEAD_GENERATION'  ,'THRUPLAY'         ,'APP_INSTALLS' ,None]
-BILLING_EVENTS=['IMPRESSIONS'   ,'IMPRESSIONS'  ,'IMPRESSIONS'      ,'IMPRESSIONS'      ,'IMPRESSIONS'  ,None]
-
-'''
-
-
-
-def create_facebook_ad_study(access_token,
-                             business_id,
-                             start_date,
-                             end_date,
-                             campaign_budget,
-                             campaign_objective,
-                             geo_locations,
-                             creative_id):
-    '''
-        creates an a/b testing study
-    
-        args:
-            access_token        :   long-lived access token             (provided from backend) <STRING>
-            business_id         :   business account id of client       (provided from backend) <STRING>
-            start_date          :   start date of the campaign          (provided from backend) <STRING> [d-m-y,H:M]
-            end_date            :   end date of the campaign            (provided from backend) <STRING> [d-m-y,H:M]
-            campaign_budget     :   the facebook campaign budget        (provided from backend) <STRING>
-            campaign_objective  :   the objective chosen at UI          (provided from backend) <STRING>
-            geo_locations       :   location to serve the ad            (provided from backend) <DICTIONARY>
-            creative_id         :   ad creative id                      (provided from backend) <STRING>
-    '''
-    # api init
-    init_api(access_token)
-    # create campaign
-    campaign_id=create_campaign(business_id,campaign_objective,start_date,end_date)
-    # budget
-    adset_budget=campaign_budget/2
-    # PRESET
-    PRESET=create_preset(campaign_objective)
-    
-    # control
-    ad_type="control"    
-    targeting=create_targeting(geo_locations,ad_type)     
-    control_id=create_adset(business_id,
-                            campaign_id,
-                            ad_type,
-                            adset_budget,
-                            PRESET,
-                            targeting,
-                            "PAUSED",
-                            start_date,
-                            end_date)
-    control_ad_id=create_ad(business_id,creative_id,ad_type,control_id)            
-    
-    # treatment
-    ad_type="treatment"    
-    targeting=create_targeting(geo_locations,ad_type)     
-    treatment_id=create_adset(business_id,
-                            campaign_id,
-                            ad_type,
-                            adset_budget,
-                            PRESET,
-                            targeting,
-                            "PAUSED",
-                            start_date,
-                            end_date)
-    treatment_ad_id=create_ad(business_id,creative_id,ad_type,treatment_id)            
-    
-
-    # set a/b testing-- seems optional now
-
-'''
-    Future TODO:
-        * CBO: On campaign level
-        * Targeting: Interest
-'''
-# ---------------------------------------------------------
-#---Extra Functions for a/b testing and so-on 
-# ---------------------------------------------------------

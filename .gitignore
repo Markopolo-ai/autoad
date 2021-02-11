@@ -23,3 +23,5 @@ venv
 autoad/*
 __pycache__/*
 .vscode/*
+__helpers__/
+node_modules/*

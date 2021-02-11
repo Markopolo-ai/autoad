@@ -3,7 +3,6 @@
 @author: MD.Nazmuddoha Ansary,Omer Sayem
 """
 # ---------------------------------------------------------
-from datetime import datetime
 from fbads import create_facebook_ad
 import json
 # ---------------------------------------------------------
@@ -99,24 +98,26 @@ def autoad(event, context):
     '''
         an example data
     
-    data={'budget'      : 20, # usd
-          'start_date'  : '27-1-2021,1:30',
-          'end_date'    : '28-1-2021,23:30',
-          'objective'   : 'Reach',  
-          'channels'    : [{'facebook':{
-                            'business_id' :   "760249887886995",
-                            'page_id'     :   "Markopoloai",
-                            'access_token':   "",
-                            'creative_id' :   "23846237956520529",
-                            'geo_location': {
-                                                'countries':['BD'], 
-                                            }
-                         }}],
-            
-        }
+    {"budget": 20,
+    "start_date"  : "27-1-2021,1:30",
+    "end_date"    : "28-1-2021,23:30",
+    "objective"   : "Reach",  
+    "channels"    :[{"facebook":{
+                                    "business_id" :   "760249887886995",
+                                    "page_id"     :   "Markopoloai",
+                                    "access_token":   "",
+                                    "creative_id" :   "23846237956520529",
+                                    "geo_location": {
+                                                    "countries":["BD"]
+                                                    }
+                                }
+                    }
+                    ]        
+    }
     '''
+    data = event['body']
     # testing    
-    process_data(data=event.body)
+    process_data(data=data)
 
 
     body = {
@@ -129,12 +130,3 @@ def autoad(event, context):
     }
 
     return response
-
-    # Use this code if you don't use the http event with the LAMBDA-PROXY
-    # integration
-    """
-    return {
-        "message": "Go Serverless v1.0! Your function executed successfully!",
-        "event": event
-    }
-    """

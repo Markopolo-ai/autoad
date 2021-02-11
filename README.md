@@ -41,13 +41,27 @@ Gnome       : 3.28.2
 ```
 * The **process_data** under **main.py** is the entry point for backend data processing (_only facebook for now_)
 
+# google-ads
+
+**Location**
+* Location IDs are listed [here](https://developers.google.com/adwords/api/docs/appendix/geotargeting) 
+* They can also be retrieved using the GeoTargetConstantService as shown [here](https://developers.google.com/google-ads/api/docs/targeting/location-targeting/)
+
+
+**Language**
+* A language criterion ID. For example, specify 1000 for English. 
+* For more information on determining this value, see the below [link](https://developers.google.com/adwords/api/docs/appendix/codes-formats#languages)
+
+
+
+
 # NOTES
 * **BUDGET**:Must meet a required minimum budget to work (FB POLICY)
 * **TODO:** 
     *   Add error handling--> This needs frontend intervention (minor)
     *   launch and test with a creative i.e- change status
-* **EXTRACODE**:The **Extra Functions for a/b testing and so-on** section in **fbads.py** are kept for future purposes 
 
-
+# Serverless
+[**Source**](https://www.serverless.com/blog/serverless-python-packaging)
 
 
