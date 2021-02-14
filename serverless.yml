@@ -6,7 +6,7 @@ provider:
   runtime: python3.6
   lambdaHashingVersion: 20201221
   memorySize: 128
-  timeout: 300
+  timeout: 30
   region: ap-south-1
   
 

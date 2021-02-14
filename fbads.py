@@ -269,3 +269,10 @@ def create_facebook_ad( access_token,
     
     print("LOG:Ad Created:",ad_id['id'])
     
+    return  {
+                    "budget":f"{campaign_budget/100} {currency}",
+                    "campaign_id":campaign_id,
+                    "adset_id":adset_id,
+                    "ad_id":ad_id,
+                    "creative_id":creative_id
+            }
